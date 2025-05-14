@@ -22,6 +22,7 @@ RUN mkdir -p /tmp/lammps/build-serial && \
     tar czvf /tmp/lammps-serial.tgz -T install_manifest.txt
 
 RUN mkdir -p /tmp/lammps/build-openmpi && \
+    sed -i 's/constexpr int maxelt *= *5;/constexpr int maxelt = 8;/' /tmp/lammps/src/MEAM/meam.h && \
     cd /tmp/lammps/build-openmpi && \
     cmake -C /tmp/lammps/cmake/presets/most.cmake \
           -D CMAKE_BUILD_TYPE=Release \
